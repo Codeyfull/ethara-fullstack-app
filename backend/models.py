@@ -23,6 +23,7 @@ class Task(Base):
     status = Column(String, default="Todo")
     project_id = Column(Integer) 
     assigned_to = Column(Integer)
+    user_id = Column(Integer, ForeignKey("users.id"))
 
 class ProjectUser(Base):
     __tablename__ = "project_users"
@@ -30,4 +31,5 @@ class ProjectUser(Base):
     project_id = Column(Integer)
     user_id = Column(Integer)
     role = Column(String) # user
+
     

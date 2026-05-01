@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from backend.database import SessionLocal
 from backend import models
 from datetime import datetime
+from auth import get_current_user
 
 router = APIRouter()
 
@@ -15,16 +16,16 @@ def get_db():
 
 # Create Task
 @router.post("/tasks")
-def create_task(title: str, description: str, project_id: int, assigned_to: int, db: Session = Depends(get_db)):
-    task = models.Task(title=title, description=description, status="Todo", project_id=project_id, assigned_to=assigned_to)
+def create_task(title: str, description: str, project_id: int, assigned_to: int, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
+    task = models.Task(title=title, description=description, status="Todo", project_id=project_id, assigned_to=assigned_to, user_id=current_user.id)
     db.add(task)
     db.commit()
     return {"message": "Task created"}
 
 # Get Tasks
 @router.get("/tasks")
-def get_tasks(db: Session = Depends(get_db)):
-    return db.query(models.Task).all()
+def get_tasks(db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
+    return db.query(models.Task).filter(models.Task.user_id == current_user.id).all()
 
 # Update Task Status
 @router.put("/tasks/{task_id}")
