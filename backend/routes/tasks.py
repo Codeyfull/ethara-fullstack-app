@@ -17,7 +17,7 @@ def get_db():
 # Create Task
 @router.post("/tasks")
 def create_task(title: str, description: str, project_id: int, assigned_to: int, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
-    task = models.Task(title=title, description=description, status="Todo", project_id=project_id, assigned_to=assigned_to, user_id=current_user.id)
+    task = models.Task(title=title, description=description, status="Todo", project_id=project_id, assigned_to=assigned_to, user_id=current_user["id"])
     db.add(task)
     db.commit()
     return {"message": "Task created"}
