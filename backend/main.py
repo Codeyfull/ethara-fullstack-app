@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from backend.database import Base, engine
 from backend import models
-from routes import users, projects, tasks
+from backend.routes import users, projects, tasks
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
