@@ -17,6 +17,6 @@ Tech Stack:
 
 Functionality: Users can create tasks that are initially pending and can be updated to done. The dashboard dynamically updates based on task status.
 
-Note: Some data may appear due to testing. This can be reset easily.
+Note: Some data may appear due to testing. This can be reset easily by reset or deleted using API.
 
 Thank you.
