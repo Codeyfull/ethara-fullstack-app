@@ -25,7 +25,7 @@ def create_task(title: str, description: str, project_id: int, assigned_to: int,
 # Get Tasks
 @router.get("/tasks")
 def get_tasks(db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
-    return db.query(models.Task).filter(models.Task.user_id == current_user.id).all()
+    return db.query(models.Task).filter(models.Task.user_id == current_user["id"]).all()
 
 # Update Task Status
 @router.put("/tasks/{task_id}")
