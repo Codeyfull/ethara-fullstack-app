@@ -18,3 +18,6 @@ def verify_password(plain, hashed):
     if len(plain) > 72:
         plain = plain[:72]
     return pwd_context.verify(plain, hashed)
+
+def get_current_user():
+    return {"id": 1}
